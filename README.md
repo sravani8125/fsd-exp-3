@@ -1,62 +1,46 @@
-# call-bind-apply-helpers <sup>[![Version Badge][npm-version-svg]][package-url]</sup>
+# has-symbols <sup>[![Version Badge][2]][1]</sup>
 
 [![github actions][actions-image]][actions-url]
 [![coverage][codecov-image]][codecov-url]
-[![dependency status][deps-svg]][deps-url]
-[![dev dependency status][dev-deps-svg]][dev-deps-url]
+[![dependency status][5]][6]
+[![dev dependency status][7]][8]
 [![License][license-image]][license-url]
 [![Downloads][downloads-image]][downloads-url]
 
-[![npm badge][npm-badge-png]][package-url]
+[![npm badge][11]][1]
 
-Helper functions around Function call/apply/bind, for use in `call-bind`.
+Determine if the JS environment has Symbol support. Supports spec, or shams.
 
-The only packages that should likely ever use this package directly are `call-bind` and `get-intrinsic`.
-Please use `call-bind` unless you have a very good reason not to.
-
-## Getting started
-
-```sh
-npm install --save call-bind-apply-helpers
-```
-
-## Usage/Examples
+## Example
 
 ```js
-const assert = require('assert');
-const callBindBasic = require('call-bind-apply-helpers');
+var hasSymbols = require('has-symbols');
 
-function f(a, b) {
-	assert.equal(this, 1);
-	assert.equal(a, 2);
-	assert.equal(b, 3);
-	assert.equal(arguments.length, 2);
-}
+hasSymbols() === true; // if the environment has native Symbol support. Not polyfillable, not forgeable.
 
-const fBound = callBindBasic([f, 1]);
-
-delete Function.prototype.call;
-delete Function.prototype.bind;
-
-fBound(2, 3);
+var hasSymbolsKinda = require('has-symbols/shams');
+hasSymbolsKinda() === true; // if the environment has a Symbol sham that mostly follows the spec.
 ```
 
+## Supported Symbol shams
+ - get-own-property-symbols [npm](https://www.npmjs.com/package/get-own-property-symbols) | [github](https://github.com/WebReflection/get-own-property-symbols)
+ - core-js [npm](https://www.npmjs.com/package/core-js) | [github](https://github.com/zloirock/core-js)
+
 ## Tests
+Simply clone the repo, `npm install`, and run `npm test`
 
-Clone the repo, `npm install`, and run `npm test`
-
-[package-url]: https://npmjs.org/package/call-bind-apply-helpers
-[npm-version-svg]: https://versionbadg.es/ljharb/call-bind-apply-helpers.svg
-[deps-svg]: https://david-dm.org/ljharb/call-bind-apply-helpers.svg
-[deps-url]: https://david-dm.org/ljharb/call-bind-apply-helpers
-[dev-deps-svg]: https://david-dm.org/ljharb/call-bind-apply-helpers/dev-status.svg
-[dev-deps-url]: https://david-dm.org/ljharb/call-bind-apply-helpers#info=devDependencies
-[npm-badge-png]: https://nodei.co/npm/call-bind-apply-helpers.png?downloads=true&stars=true
-[license-image]: https://img.shields.io/npm/l/call-bind-apply-helpers.svg
+[1]: https://npmjs.org/package/has-symbols
+[2]: https://versionbadg.es/inspect-js/has-symbols.svg
+[5]: https://david-dm.org/inspect-js/has-symbols.svg
+[6]: https://david-dm.org/inspect-js/has-symbols
+[7]: https://david-dm.org/inspect-js/has-symbols/dev-status.svg
+[8]: https://david-dm.org/inspect-js/has-symbols#info=devDependencies
+[11]: https://nodei.co/npm/has-symbols.png?downloads=true&stars=true
+[license-image]: https://img.shields.io/npm/l/has-symbols.svg
 [license-url]: LICENSE
-[downloads-image]: https://img.shields.io/npm/dm/call-bind-apply-helpers.svg
-[downloads-url]: https://npm-stat.com/charts.html?package=call-bind-apply-helpers
-[codecov-image]: https://codecov.io/gh/ljharb/call-bind-apply-helpers/branch/main/graphs/badge.svg
-[codecov-url]: https://app.codecov.io/gh/ljharb/call-bind-apply-helpers/
-[actions-image]: https://img.shields.io/endpoint?url=https://github-actions-badge-u3jn4tfpocch.runkit.sh/ljharb/call-bind-apply-helpers
-[actions-url]: https://github.com/ljharb/call-bind-apply-helpers/actions
+[downloads-image]: https://img.shields.io/npm/dm/has-symbols.svg
+[downloads-url]: https://npm-stat.com/charts.html?package=has-symbols
+[codecov-image]: https://codecov.io/gh/inspect-js/has-symbols/branch/main/graphs/badge.svg
+[codecov-url]: https://app.codecov.io/gh/inspect-js/has-symbols/
+[actions-image]: https://img.shields.io/endpoint?url=https://github-actions-badge-u3jn4tfpocch.runkit.sh/inspect-js/has-symbols
+[actions-url]: https://github.com/inspect-js/has-symbols/actions
